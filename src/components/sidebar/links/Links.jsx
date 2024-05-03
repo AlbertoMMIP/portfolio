@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { app } from './../../../constants';
 
 const variants = {
   open: {
@@ -27,13 +28,8 @@ const itemVariants = {
 }
 
 const Link = () => {
-  const items = [
-    "Homepage",
-    "Services",
-    "Portfolio",
-    "Contact",
-    "About"
-  ]
+  const { items } = app.menu;
+
   return (
     <motion.div className="links" variants={variants}>
       {

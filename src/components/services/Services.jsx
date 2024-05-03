@@ -1,6 +1,7 @@
 import { useRef } from 'react';
-import './services.scss';
 import { motion, useInView } from 'framer-motion';
+import { app } from './../../constants';
+import './services.scss';
 
 
 const variants = {
@@ -22,7 +23,7 @@ const variants = {
 const Services = () => {
   const ref = useRef();
 
-  const isInView = useInView(ref, { margin: "-100px" });
+  const { experience } = app;
 
   return (
     <motion.div 
@@ -30,7 +31,7 @@ const Services = () => {
       ref={ref} 
       variants={variants} 
       initial="initial" 
-      animate={ isInView && "animate"}>
+      animate="animate">
       <motion.div className='textContainer' variants={variants}>
         <p> I focus on helping your brand grow
           <br /> and move forward
@@ -40,38 +41,25 @@ const Services = () => {
       <motion.div className='titleContainer' variants={variants}>
         <div className='title'>
           <img src='/people.webp' alt='' />
-          <h1><motion.b whileHover={{ color: "orange" }}>Unique</motion.b> Ideas</h1>
+          <h1>My <motion.b whileHover={{ color: "orange" }}>Experience</motion.b></h1>
         </div>
         <div className='title'>
-          <h1><motion.b whileHover={{ color: "orange" }}>For Your</motion.b> Business</h1>
-          <button> WHAT WE DO? </button>
+          <h1><motion.b whileHover={{ color: "orange" }}>Software Engineer</motion.b> JavaScript</h1>
+          <button> WHAT I DO? </button>
         </div>
       </motion.div>
       <motion.div className='listContainer' variants={variants}>
-        <motion.div className='box' whileHover={{ background: "lightgray", color: "black" }}>
-          <h2>Branging</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
-          <button>Go</button>
-        </motion.div>
-        <motion.div className='box' whileHover={{ background: "lightgray", color: "black" }}>
-          <h2>Branging</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
-          <button>Go</button>
-        </motion.div>
-        <motion.div className='box' whileHover={{ background: "lightgray", color: "black" }}>
-          <h2>Branging</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
-          <button>Go</button>
-        </motion.div>
-        <motion.div className='box' whileHover={{ background: "lightgray", color: "black" }}>
-          <h2>Branging</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
-          <button>Go</button>
-        </motion.div>
+        {
+          experience && experience.map(job => (
+            <motion.div className='box' whileHover={{ background: "lightgray", color: "black" }}>
+              <h2>{job.company}</h2>
+              <h3>{job.rol}</h3>
+              <p>{`${job.from}-${job.to}`}</p>
+              <p>{job.summary}</p>
+              <button>Go</button>
+            </motion.div>
+          ))
+        }
       </motion.div>
     </motion.div>
   );
