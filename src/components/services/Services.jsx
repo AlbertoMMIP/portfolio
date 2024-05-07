@@ -51,12 +51,11 @@ const Services = () => {
       <motion.div className='listContainer' variants={variants}>
         {
           experience && experience.map(job => (
-            <motion.div className='box' whileHover={{ background: "lightgray", color: "black" }}>
+            <motion.div className='box' whileHover={{ background: "lightgray", color: "black" }} key={job.company}>
               <h2>{job.company}</h2>
               <h3>{job.rol}</h3>
-              <p>{`${job.from}-${job.to}`}</p>
               <p>{job.summary}</p>
-              <button>Go</button>
+              <button>{`${job.from}-${job.to}`}</button>
             </motion.div>
           ))
         }
